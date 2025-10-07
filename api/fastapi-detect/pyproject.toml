@@ -1,0 +1,16 @@
+[project]
+name = "fastapi-detect"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.35.30",
+    "colorlog>=6.8.2",
+    "doppler-env>=0.3.1",
+    "fastapi[standard]>=0.115.0",
+    "pydantic-settings>=2.5.2",
+    "python-dotenv>=1.0.1",
+    "python-multipart>=0.0.12",
+    "ultralytics>=8.3.2",
+]

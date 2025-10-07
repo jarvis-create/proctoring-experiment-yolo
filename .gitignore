@@ -1,0 +1,41 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Generated files
+public/sw.*
+
+api/fastapi-detect/.venv
+api/fastapi-detect/__pycache__
+api/fastapi-detect/.env
+runs/detect/*
+
+# VS Code specific files
+.vscode/
+*.suo
+*.user
+*.vshost.exe
+
+#generated pictures 
+*.jpg
