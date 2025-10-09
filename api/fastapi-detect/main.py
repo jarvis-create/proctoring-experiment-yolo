@@ -7,8 +7,7 @@ from middleware_services import middleware_log
 
 origins = [
     "http://localhost:3000",
-    "http://localhost:3001",
-    "https://staging-proctor.test.com",
+    "http://localhost:3001"
 ]
 
 app = FastAPI()

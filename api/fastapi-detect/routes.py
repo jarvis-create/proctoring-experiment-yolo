@@ -33,14 +33,8 @@ async def analyze_r2_image(file: UploadFile = File(...)):
 
 
 
-    # # Run inference on the source
     results = model.predict(file_url, conf=0.3, save=True)
-    # results = await asyncio.to_thread(model.predict,source=file_url, conf=0.3, save=True)
-
-
-    # crerate an array of results and put only the ones with name "person" or "cellphone" in it
-
-   # Process the results
+   
     detections = []
 
     for r in results:
@@ -74,12 +68,10 @@ async def analyze_r2_image(file: UploadFile = File(...)):
 async def analyze_local_image(file: UploadFile = File(...)):
     routelogger.info('Starting analyze_image function')
 
-    # Validate file type (optional but recommended)
     if not file.content_type.startswith('image/'):
         routelogger.error('Uploaded file is not an image.')
         raise HTTPException(status_code=400, detail="Invalid file type. Please upload an image.")
 
-    # Save the uploaded file to a temporary location
     try:
         with NamedTemporaryFile(delete=False, suffix=Path(file.filename).suffix) as tmp:
             shutil.copyfileobj(file.file, tmp)
@@ -93,11 +85,9 @@ async def analyze_local_image(file: UploadFile = File(...)):
         model = YOLO("yolov8n.pt")
         routelogger.info("YOLO model loaded successfully.")
 
-        # Run inference on the local file
         results = model.predict(source=tmp_path, conf=0.3, save=True)
         routelogger.info("YOLO prediction completed.")
 
-        # Process the results
         detections = []
         for r in results:
             boxes = r.boxes
@@ -131,7 +121,6 @@ async def analyze_local_image(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Failed to analyze the image.")
 
     finally:
-        # Clean up the temporary file
         try:
             Path(tmp_path).unlink(missing_ok=True)
             routelogger.info(f"Temporary file {tmp_path} deleted.")
